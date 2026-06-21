@@ -1,0 +1,56 @@
+# Datasets
+Kaggle/
+Mendeley/
+temp_keras_unzip/
+
+# Python Virtual Environments & Packages
+venv/
+.venv/
+tb_api/venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node/Frontend dependencies and builds
+node_modules/
+tb_frontend/node_modules/
+.next/
+tb_frontend/.next/
+tb_frontend/out/
+tb_frontend/.vercel/
+.turbopack/
+tb_frontend/.turbopack/
+
+# Large model files (>20MB) that are not used by the running API to keep repo small and push fast
+outputs/best_ResNet50_final.keras
+outputs/best_ResNet50_stage1.keras
+outputs/best_VGG16_final.keras
+outputs/tb_cnn_resnet50_final.keras
+outputs/best_VGG16_stage1.keras
+outputs/tb_cnn_vgg16_final.keras
+outputs/best_EfficientNetB0_final.keras
+outputs/best_EfficientNetB0_stage1.keras
+outputs/best_BasicCNN.keras
+outputs/best_BasicCNN2.keras
+outputs/best_BasicCNN_fixed.keras
+outputs/best_BasicCNN_v2.keras
+outputs/tb_api/outputs/
+outputs/augmented_train_data/
+
+# Environment configurations and logs
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+tb_api/.env
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db

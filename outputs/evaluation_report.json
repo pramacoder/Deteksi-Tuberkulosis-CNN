@@ -1,0 +1,43 @@
+{
+  "best_architecture": "VGG16",
+  "optimal_threshold": 0.98,
+  "results_per_architecture": {
+    "EfficientNetB0": {
+      "accuracy": 0.9764044943820225,
+      "f1": 0.9688888888888889,
+      "auc_roc": 0.9926186178442495,
+      "precision_tb": 0.9646017699115044,
+      "recall_tb": 0.9732142857142857,
+      "precision_normal": 0.9836660617059891,
+      "recall_normal": 0.9783393501805054
+    },
+    "ResNet50": {
+      "accuracy": 0.9808988764044944,
+      "f1": 0.9749631811487481,
+      "auc_roc": 0.997276302217638,
+      "precision_tb": 0.9650145772594753,
+      "recall_tb": 0.9851190476190477,
+      "precision_normal": 0.9908592321755028,
+      "recall_normal": 0.9783393501805054
+    },
+    "VGG16": {
+      "accuracy": 0.9337078651685393,
+      "f1": 0.9188445667125172,
+      "auc_roc": 0.9979209644146467,
+      "precision_tb": 0.8542199488491049,
+      "recall_tb": 0.9940476190476191,
+      "precision_normal": 0.9959919839679359,
+      "recall_normal": 0.8971119133574007
+    }
+  },
+  "config": {
+    "img_size": [
+      224,
+      224
+    ],
+    "batch_size": 32,
+    "epochs_stage1": 15,
+    "epochs_stage2": 15,
+    "random_seed": 42
+  }
+}

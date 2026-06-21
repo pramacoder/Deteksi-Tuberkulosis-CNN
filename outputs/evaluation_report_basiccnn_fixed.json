@@ -1,0 +1,26 @@
+{
+  "model": "BasicCNN",
+  "optimal_threshold": 0.01,
+  "results": {
+    "accuracy": 0.9944547134935305,
+    "auc_roc": 0.9989925113472304,
+    "auc_pr": 0.9991157159394576,
+    "f1": 0.9936974789915967,
+    "precision_tb": 1.0,
+    "recall_tb": 0.9874739039665971,
+    "precision_normal": 0.9901477832512315,
+    "recall_normal": 1.0
+  },
+  "config": {
+    "img_size": [
+      224,
+      224
+    ],
+    "batch_size": 32,
+    "epochs_trained": 17,
+    "epochs_max": 50,
+    "learning_rate": 0.0005,
+    "random_seed": 42,
+    "architecture": "BasicCNN (4 Conv Blocks, no Transfer Learning)"
+  }
+}
