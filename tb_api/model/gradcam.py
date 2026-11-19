@@ -1,7 +1,5 @@
 import cv2
 import numpy as np
-import tensorflow as tf
-import keras
 import base64
 
 IMG_SIZE = (224, 224)
@@ -9,6 +7,11 @@ LAST_CONV_LAYER = 'block4_conv'
 
 def get_gradcam_heatmap(model, img_array, last_conv_layer_name=LAST_CONV_LAYER):
     """Generate Grad-CAM heatmap for BasicCNN."""
+    if hasattr(model, 'get_gradcam'):
+        return model.get_gradcam(img_array)
+    
+    import tensorflow as tf
+    import keras
     grad_model = keras.models.Model(
         inputs=model.input,
         outputs=[model.get_layer(last_conv_layer_name).output, model.output]
@@ -31,23 +34,24 @@ def get_gradcam_heatmap(model, img_array, last_conv_layer_name=LAST_CONV_LAYER):
 
 def generate_gradcam_overlay(image_bytes: bytes, heatmap: np.ndarray, alpha=0.45) -> str:
     """Generate base64 encoded PNG of the original image with Grad-CAM overlay."""
-    # Decode original image in color
     nparr = np.frombuffer(image_bytes, np.uint8)
     orig_img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    if orig_img is None:
+        from PIL import Image
+        import io
+        pil_img = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+        orig_img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
+        
     orig_img = cv2.cvtColor(orig_img, cv2.COLOR_BGR2RGB)
     
-    # Resize original to model size for overlay consistency
     orig_img = cv2.resize(orig_img, IMG_SIZE)
     
-    # Process heatmap
     heatmap_resized = cv2.resize(heatmap, IMG_SIZE)
     heatmap_colored = cv2.applyColorMap(np.uint8(255 * heatmap_resized), cv2.COLORMAP_JET)
     heatmap_colored = cv2.cvtColor(heatmap_colored, cv2.COLOR_BGR2RGB)
     
-    # Superimpose
     superimposed = np.uint8(heatmap_colored * alpha + orig_img * (1 - alpha))
     
-    # Encode to base64
     _, buffer = cv2.imencode('.png', cv2.cvtColor(superimposed, cv2.COLOR_RGB2BGR))
     base64_str = base64.b64encode(buffer).decode('utf-8')
     return base64_str
